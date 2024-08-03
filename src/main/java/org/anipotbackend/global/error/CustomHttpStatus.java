@@ -9,8 +9,7 @@ public enum CustomHttpStatus {
      * 600 : 학생 인증이 없을 경우
      */
 //    REQUIRED_DOCUMENT_UPDATE(510, CustomSeries.DOCUMENT_ERROR, "Required Document Info"),
-//    BANNED_REQUEST(440, CustomSeries.BANNED_ERROR, "User got banned because of too many sms request");
-    CUSTOM_ERROR(450, CustomSeries.CUSTOM_ERROR, "Custom Error");
+    BANNED_REQUEST(440, CustomSeries.BANNED_ERROR, "User got banned because of too many sms request");
 
     public static final CustomHttpStatus[] VALUES;
 

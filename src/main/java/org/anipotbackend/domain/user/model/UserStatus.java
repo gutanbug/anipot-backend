@@ -6,6 +6,7 @@ import lombok.Getter;
 public enum UserStatus {
     ACTIVE,
     INACTIVE,
+    BANNED,
     WITHDRAWAL;
 
     public boolean isActive() {
