@@ -1,17 +1,11 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.3.2'
-    id 'io.spring.dependency-management' version '1.1.6'
+    id 'org.springframework.boot' version '3.2.4'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 }
 
 group = 'org'
 version = '1.0.0'
-
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
-    }
-}
 
 configurations {
     compileOnly {
@@ -28,39 +22,37 @@ repositories {
 }
 
 dependencies {
-    //spring
-    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    // spring boot
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
-
-    // mongo
-    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
-
-    // kafka
-    implementation 'org.springframework.kafka:spring-kafka'
-
-    // mysql
-    runtimeOnly 'com.mysql:mysql-connector-j'
-
-    // influx
-    runtimeOnly 'io.micrometer:micrometer-registry-influx'
 
     // monitoring
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
-    runtimeOnly 'io.micrometer:micrometer-registry-prometheus'
+    implementation 'io.micrometer:micrometer-registry-prometheus'
+
+    // AWS
+    implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
+
+    // lombok
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.projectlombok:lombok'
+
+    implementation 'javax.xml.bind:jaxb-api:2.3.1'
 
     // redis
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
     implementation 'org.redisson:redisson-spring-boot-starter:3.20.0'
 
-    // swagger
-    annotationProcessor 'com.github.therapi:therapi-runtime-javadoc-scribe:0.15.0'
-    implementation 'com.github.therapi:therapi-runtime-javadoc:0.15.0'
-    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
-    implementation 'org.springdoc:springdoc-openapi-starter-webflux-ui:2.1.0'
+    // db
+    runtimeOnly 'com.mysql:mysql-connector-j'
+
+    // jsoup (html parser)
+    implementation 'org.jsoup:jsoup:1.15.4'
 
     // jwt
     implementation 'io.jsonwebtoken:jjwt:0.9.1'
@@ -68,22 +60,49 @@ dependencies {
     // json
     implementation 'com.googlecode.json-simple:json-simple:1.1.1'
 
+    // swagger
+    annotationProcessor 'com.github.therapi:therapi-runtime-javadoc-scribe:0.15.0'
+    implementation 'com.github.therapi:therapi-runtime-javadoc:0.15.0'
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
+    implementation 'org.springdoc:springdoc-openapi-starter-webflux-ui:2.1.0'
+
+    // mongoDB
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+
+    implementation 'jakarta.servlet:jakarta.servlet-api:5.0.0'
+
+    // Oauth
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+
     // error log
     implementation 'org.apache.commons:commons-lang3:3.14.0'
 
-    // xml bind
-    implementation 'javax.xml.bind:jaxb-api:2.3.1'
+    // thymeleaf
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
-    // lombok
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.projectlombok:lombok'
+    // Excel
+    implementation group: 'org.apache.poi', name: 'poi', version: '5.3.0'
+    implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '5.3.0'
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.17.1'
 
     // test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
-    testImplementation 'org.testcontainers:junit-jupiter'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testImplementation 'com.squareup.okhttp3:mockwebserver:4.10.0'
+    // TestContainer 기본 의존성
+    testImplementation "org.testcontainers:testcontainers"
+    // MySQL 의존성
+    testImplementation 'org.testcontainers:mysql'
+    // Redis 의존성
+    testImplementation "com.redis.testcontainers:testcontainers-redis-junit:1.6.4"
+    // Mongo 의존성
+    testImplementation "org.testcontainers:mongodb:1.17.3"
+    //Auto-retry
+    implementation 'org.springframework.retry:spring-retry:1.3.4'
+    implementation 'org.springframework:spring-aspects:5.3.25'
+
+    implementation 'org.hibernate:hibernate-core:6.5.0.Final'
+    implementation 'com.zaxxer:HikariCP'
 }
 
 tasks.named('test') {
@@ -99,4 +118,12 @@ test {
         events "failed"
         exceptionFormat "full"
     }
+}
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs << "-parameters"
+}
+
+bootRun{
+    jvmArgs = ["-Duser.timezone=Asia/Seoul"]
 }
