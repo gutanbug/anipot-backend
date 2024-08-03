@@ -1,0 +1,11 @@
+spring:
+  messages.basename: messages,errors
+
+app:
+  enable-test-controller: true
+  auth:
+    jwt:
+      access-expiration: P3D
+      refresh-expiration: P15D
+      secret-key: asldfkjaasnasdklfjalekjfslakcnvlaskejlfisajdkfalseifn
+
