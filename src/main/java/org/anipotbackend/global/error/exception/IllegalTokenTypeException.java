@@ -1,2 +1,10 @@
-package org.anipotbackend.global.error.excp;public class IllegalTokenTypeException {
+package org.anipotbackend.global.error.exception;
+
+import org.springframework.http.HttpStatus;
+
+public class IllegalTokenTypeException extends LocalizedMessageException {
+
+    public IllegalTokenTypeException() {
+        super(HttpStatus.NOT_ACCEPTABLE, "invalid.token-type");
+    }
 }

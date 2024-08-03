@@ -1,2 +1,10 @@
-package org.anipotbackend.global.error.exception;public class InvalidJwtTokenException {
+package org.anipotbackend.global.error.exception;
+
+import org.springframework.http.HttpStatus;
+
+public class InvalidJwtTokenException extends LocalizedMessageException{
+
+    public InvalidJwtTokenException() {
+        super(HttpStatus.FORBIDDEN, "invalid.token");
+    }
 }

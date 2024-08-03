@@ -1,4 +1,4 @@
-package org.anipotbackend.global.swagger.auth;
+package org.anipotbackend.global.auth;
 
 public class UserAuthNames {
     public static final String ROLE_ADMIN = "ROLE_ADMIN";

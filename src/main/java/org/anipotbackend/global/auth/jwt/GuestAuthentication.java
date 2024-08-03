@@ -1,6 +1,7 @@
-package org.anipotbackend.global.auth;
+package org.anipotbackend.global.auth.jwt;
 
 import org.anipotbackend.domain.user.model.UserStatus;
+import org.anipotbackend.global.auth.UserRole;
 
 public class GuestAuthentication extends JwtAuthentication{
 

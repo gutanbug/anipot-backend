@@ -1,7 +1,8 @@
-package org.anipotbackend.global.auth;
+package org.anipotbackend.global.auth.jwt;
 
 import lombok.AllArgsConstructor;
 import org.anipotbackend.domain.user.model.UserStatus;
+import org.anipotbackend.global.auth.UserRole;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.ArrayList;

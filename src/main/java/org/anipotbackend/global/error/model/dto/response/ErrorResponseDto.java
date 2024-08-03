@@ -1,4 +1,4 @@
-package org.anipotbackend.global.error.model.dto;
+package org.anipotbackend.global.error.model.dto.response;
 
 import lombok.Getter;
 import org.anipotbackend.global.error.exception.LocalizedMessageException;
