@@ -1,6 +1,8 @@
 package org.anipotbackend.domain.user.model.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
@@ -29,8 +31,10 @@ public class User extends BaseEntity {
 
     private String birthDate;
 
+    @Enumerated(EnumType.STRING)
     private UserRole userRole;
 
+    @Enumerated(EnumType.STRING)
     private UserStatus userStatus;
 
     @Builder
