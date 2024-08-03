@@ -1,19 +1,18 @@
-package org.anipotbackend.global.swagger.auth;
+package org.anipotbackend.global.auth;
 
 import lombok.Getter;
+import org.anipotbackend.global.auth.jwt.AppAuthentication;
 
 import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static org.anipotbackend.global.swagger.auth.UserAuthNames.*;
-
 @Getter
 public enum UserRole {
-    USER(ROLE_USER),
-    GUEST(ROLE_GUEST),
-    ADMIN(combine(ROLE_ADMIN, ROLE_USER, ROLE_GUEST));
+    USER(UserAuthNames.ROLE_USER),
+    GUEST(UserAuthNames.ROLE_GUEST),
+    ADMIN(UserAuthNames.combine(UserAuthNames.ROLE_ADMIN, UserAuthNames.ROLE_USER, UserAuthNames.ROLE_GUEST));
 
     private final String name;
 
@@ -33,7 +32,7 @@ public enum UserRole {
                 .anyMatch(avail -> avail.equals(role));
     }
 
-    public static UserRole from(ApopAuthentication auth) {
+    public static UserRole from(AppAuthentication auth) {
         if (auth == null) {
             return GUEST;
         }
