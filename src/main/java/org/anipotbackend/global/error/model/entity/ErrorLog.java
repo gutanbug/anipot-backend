@@ -1,7 +1,8 @@
-package org.anipotbackend.global.error.model;
+package org.anipotbackend.global.error.model.entity;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.anipotbackend.global.error.model.dto.response.ErrorResponseDto;
 
 @Getter
 @RequiredArgsConstructor
