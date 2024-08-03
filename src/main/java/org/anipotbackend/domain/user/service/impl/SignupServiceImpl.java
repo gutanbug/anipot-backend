@@ -2,7 +2,7 @@ package org.anipotbackend.domain.user.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.anipotbackend.domain.user.exception.AlreadyUserException;
+import org.anipotbackend.domain.user.exception.*;
 import org.anipotbackend.domain.user.model.dto.request.UserSignupRequest;
 import org.anipotbackend.domain.user.model.entity.User;
 import org.anipotbackend.domain.user.repository.UserRepository;
@@ -26,6 +26,11 @@ public class SignupServiceImpl implements SignupService {
     @Override
     @Transactional
     public void signup(UserSignupRequest request) {
+        checkValidEmail(request.getEmail());
+        checkValidPhone(request.getPhone());
+        checkValidNickname(request.getNickname());
+        checkValidPassword(request.getPassword());
+
         String validatePhone = eliminateDash(request.getPhone());
 
         checkAlreadyPhone(validatePhone);
@@ -45,25 +50,68 @@ public class SignupServiceImpl implements SignupService {
         userRepository.save(user);
     }
 
-    private void checkAlreadyPhone(String validatePhone) {
-        if (userRepository.findByPhone(validatePhone).isPresent()) {
-            throw new AlreadyUserException();
+    public void checkValidPhone(String phone) {
+        if (phone.contains("-")) {
+            if (phone.split("-").length != 3) {
+                throw new InvalidPhoneException();
+            }
+
+            String[] splitPhone = phone.split("-");
+            if (splitPhone[0].length() != 3 || splitPhone[1].length() != 4 || splitPhone[2].length() != 4) {
+                throw new InvalidPhoneException();
+            }
+        } else {
+            if (phone.length() != 11) {
+                throw new InvalidPhoneException();
+            }
         }
     }
 
-    private void checkAlreadyLoginId(String loginId) {
-        if (userRepository.findByLoginId(loginId).isPresent()) {
-            throw new AlreadyUserException();
-        }
-    }
-
-    private void checkAlreadyEmail(String email) {
-        if (userRepository.findByEmail(email).isPresent()) {
-            throw new AlreadyUserException();
+    public void checkValidEmail(String email) {
+        String regex = "^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,8}$";
+        if (!email.matches(regex)) {
+            throw new InvalidEmailException();
         }
     }
 
     public String eliminateDash(String phone) {
         return phone.trim().replaceAll("-", "");
+    }
+
+    public void checkAlreadyPhone(String validatePhone) {
+        if (userRepository.findByPhone(validatePhone).isPresent()) {
+            throw new AlreadyUserException();
+        }
+    }
+
+    public void checkAlreadyLoginId(String loginId) {
+        if (userRepository.findByLoginId(loginId).isPresent()) {
+            throw new AlreadyUserException();
+        }
+    }
+
+    public void checkAlreadyEmail(String email) {
+        if (userRepository.findByEmail(email).isPresent()) {
+            throw new AlreadyUserException();
+        }
+    }
+
+    public void checkValidNickname(String nickname) {
+        if (nickname.length() > 8) {
+            throw new InvalidNicknameException();
+        }
+    }
+
+    public void checkValidPassword(String password) {
+        if (password.length() < 8) {
+            throw new InvalidPasswordException();
+        }
+
+        String regex = "^(?=.*[a-zA-Z])(?=.*\\d)(?=.*[!@#$%^&*()\\-_=+<>?{}~|]).{8,}$";
+
+        if (!password.matches(regex)) {
+            throw new InvalidPasswordException();
+        }
+
     }
 }

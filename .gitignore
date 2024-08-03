@@ -38,5 +38,4 @@ out/
 
 application.properties
 application.yml
-*.properties
 docker-compose-local.yml

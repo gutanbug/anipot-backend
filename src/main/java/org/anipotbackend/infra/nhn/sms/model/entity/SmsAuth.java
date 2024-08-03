@@ -25,7 +25,7 @@ public class SmsAuth {
     @Field(name = "phone")
     private String phone;
 
-    @Field(name = "situation_code")
+    @Field(name = "type")
     private SmsType smsType;
 
     @Field(name = "code")
