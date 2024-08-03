@@ -1,4 +1,4 @@
-package org.anipotbackend.global.swagger;
+package org.anipotbackend.global.config.swagger;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import org.springdoc.core.models.GroupedOpenApi;
