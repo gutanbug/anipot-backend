@@ -1,4 +1,4 @@
-package org.anipotbackend.global.auth;
+package org.anipotbackend.global.auth.jwt;
 
 public interface AuthenticationToken {
     String getAccessToken();

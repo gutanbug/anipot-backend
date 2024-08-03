@@ -1,4 +1,4 @@
-package org.anipotbackend.global.auth;
+package org.anipotbackend.global.auth.jwt;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

@@ -1,4 +1,4 @@
-package org.anipotbackend.global.auth;
+package org.anipotbackend.global.auth.jwt;
 
 import io.jsonwebtoken.*;
 import jakarta.servlet.http.Cookie;
@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.anipotbackend.domain.user.model.UserStatus;
 import org.anipotbackend.domain.user.model.entity.User;
+import org.anipotbackend.global.auth.UserRole;
 import org.anipotbackend.global.error.exception.IllegalTokenTypeException;
 import org.anipotbackend.global.error.exception.InvalidJwtTokenException;
 import org.springframework.beans.factory.annotation.Value;
