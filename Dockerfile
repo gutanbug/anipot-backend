@@ -9,7 +9,6 @@ COPY $ROOT_DIRECTORY/gradle gradle
 COPY $ROOT_DIRECTORY/build.gradle .
 COPY $ROOT_DIRECTORY/settings.gradle .
 COPY $ROOT_DIRECTORY/src src
-COPY $ROOT_DIRECTORY/feasta-backend-config feasta-backend-config
 
 RUN chmod +x ./gradlew
 RUN ./gradlew tasks
