@@ -26,7 +26,7 @@ import java.util.Map;
         ),
         servers = {
                 @io.swagger.v3.oas.annotations.servers.Server(url = "/", description = "로컬 서버"),
-                // todo : 개발 서버 추가
+                @io.swagger.v3.oas.annotations.servers.Server(url = "https://danvery.com/api", description = "개발 서버")
         }
 )
 @SecurityScheme(

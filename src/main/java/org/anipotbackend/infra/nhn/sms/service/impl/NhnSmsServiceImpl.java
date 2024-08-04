@@ -42,13 +42,13 @@ public class NhnSmsServiceImpl implements NhnSmsService {
     private final WebClient webClient;
 
     @Value("${nhn.sms.api-path}")
-    private final String apiPath;
+    private String apiPath;
 
     @Value("${nhn.sms.secret-key}")
-    private final String secretKey;
+    private String secretKey;
 
     @Value("${nhn.sms.sender-phone}")
-    private final String senderPhone;
+    private String senderPhone;
 
     private final SmsAuthRepository smsAuthRepository;
     private final MongoTemplate mongoTemplate;

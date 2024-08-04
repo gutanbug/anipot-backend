@@ -29,13 +29,13 @@ public class JwtProvider implements AuthenticationTokenProvider {
     public static final String REFRESH_PREFIX = "anipot-refresh";
 
     @Value("${app.auth.jwt.access-expiration}")
-    private final Duration accessExpiration;
+    private Duration accessExpiration;
 
     @Value("${app.auth.jwt.refresh-expiration}")
-    private final Duration refreshExpiration;
+    private Duration refreshExpiration;
 
     @Value("${app.auth.jwt.secret-key}")
-    private final String secretKey;
+    private String secretKey;
 
 
     @Override
