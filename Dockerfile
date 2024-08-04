@@ -2,8 +2,6 @@ FROM openjdk:17-jdk-slim
 
 RUN cp /usr/share/zoneinfo/Asia/Seoul /etc/localtime && echo "Asia/Seoul" > /etc/timezone
 
-ARG ROOT_DIRECTORY=../..
-
 COPY $ROOT_DIRECTORY/gradlew .
 COPY $ROOT_DIRECTORY/gradle gradle
 COPY $ROOT_DIRECTORY/build.gradle .
